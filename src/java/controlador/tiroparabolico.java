@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Tiro;
 import modelo.Utilidades;
 
 /**
@@ -74,7 +75,19 @@ public class tiroparabolico extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String velocidad = request.getParameter("velocidad");
+        String angulo = request.getParameter("angulo");
+        
+        int velocidadint = Integer.parseInt(velocidad);
+        int anguloint = Integer.parseInt(angulo);
+        
+        Tiro mitiro = new Tiro(velocidadint, anguloint);
+        request.setAttribute("tiro", mitiro);
+        ArrayList<String> angulos = Utilidades.getAngulos();
+        request.setAttribute("angulos", angulos);
+        
+        request.getRequestDispatcher("tiroparabolico.jsp").forward(request, response);
     }
 
     /**
