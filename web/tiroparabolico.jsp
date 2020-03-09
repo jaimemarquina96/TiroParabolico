@@ -4,6 +4,8 @@
     Author     : DAW203
 --%>
 
+<%@page import="modelo.Coordenada"%>
+<%@page import="modelo.Utilidades"%>
 <%@page import="modelo.Tiro"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -54,6 +56,25 @@
             <% if(maxaltura != "") { %>
             <h2>La altura máxima es: <%=maxaltura%></h2>
             <% } %>
+            
+            <table border="1">
+                <% 
+                ArrayList<Coordenada> coordenadas = (ArrayList<Coordenada>) request.getAttribute("listaCoordenadas");
+                if(coordenadas != null){ %>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                </tr>
+                <% for(int x = 0; x<coordenadas.size(); x++) { 
+                    Coordenada coord = coordenadas.get(x);
+                %>
+                <tr>
+                    <td><%=coord.getX()%></td>
+                    <td><%=coord.getY()%></td>
+                </tr>
+                <% } %>
+                <% } %>
+            </table>
         </form>
     </body>
 </html>

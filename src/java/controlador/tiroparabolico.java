@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Coordenada;
 import modelo.Tiro;
 import modelo.Utilidades;
 
@@ -87,6 +88,11 @@ public class tiroparabolico extends HttpServlet {
         ArrayList<String> angulos = Utilidades.getAngulos();
         request.setAttribute("angulos", angulos);
         
+        
+        
+        ArrayList<Coordenada> listaCoordenadas = Utilidades.generaCoordenadas(mitiro.getMaxalcance(), mitiro.getVelocidadinicial(), anguloint);
+        
+        request.setAttribute("listaCoordenadas", listaCoordenadas);
         request.getRequestDispatcher("tiroparabolico.jsp").forward(request, response);
     }
 
